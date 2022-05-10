@@ -5,7 +5,7 @@ import Content from './Content'
 import Title from './Title'
 
 interface Prop {
-  children: React.ReactComponentElement<any>
+  children: any
   title?: string
 }
 
