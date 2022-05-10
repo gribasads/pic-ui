@@ -1,5 +1,6 @@
+import Link from 'next/link'
 import React from 'react'
-import { IconTop } from '../components/icons'
+import { IconTop, IconService, IconUser,IconHistoric } from '../components/icons'
 import BlockMenu from '../components/template/BlockMenu'
 import Page from '../components/template/Page'
 
@@ -7,13 +8,11 @@ import Page from '../components/template/Page'
 export default function index() {
   return (
     
-      <Page title='Bem Vindo'>
-        <div className="flex justify-center">
-          <BlockMenu url='/service' label='Chamados' icon={IconTop}/>
-          <BlockMenu url='/historic' label='Histórico' icon={IconTop}/>
-          <BlockMenu url='/profile' label='Dados Cadastrais' icon={IconTop}/>
-        </div>
-      </Page>
+      <div className='bg-amber-400'>
+        <Link href='/home' passHref>
+            <button>Entrar</button>
+        </Link>
+      </div>
     
   )
 }

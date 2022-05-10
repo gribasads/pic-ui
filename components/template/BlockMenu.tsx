@@ -9,7 +9,7 @@ export default function BlockMenu(props:any) {
          <div className={`
                 flex flex-col items-center justify-center
                 border-2 border-black rounded-lg w-60 h-40 mr-10 mb-4
-                hover:text-blue-300 hover:border-blue-300
+                hover:text-amber-400 hover:border-amber-400
                 cursor-pointer 
             `}>
                 {props.icon("h-10 w-20")}

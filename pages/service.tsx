@@ -1,4 +1,5 @@
 import React from 'react'
+import BackButton from '../components/Button/back'
 import Table from '../components/table'
 import Page from '../components/template/Page'
 
@@ -15,6 +16,9 @@ export default function service() {
   return (
     <Page title='Chamados'>
         <Table data={data} headers={headers}/>
+      <div className='flex justify-end pt-2 gap-4'>
+      <BackButton />
+      </div>
     </Page>
   )
 }

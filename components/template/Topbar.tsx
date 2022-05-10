@@ -7,7 +7,7 @@ export default function Topbar() {
     <div
     className='flex justify-center bg-gray-100 font-bold py-6 px-6 shadow-md'
     >
-      <a href="/">{IconTop()}</a>
+      <a href="/home">{IconTop()}</a>
     </div>
   )
 }
