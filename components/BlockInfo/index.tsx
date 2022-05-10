@@ -9,7 +9,7 @@ export default function BlockInfo({infos, title} : {infos: any, title: string}) 
          infos.map((info:any) => (
               <div key={info.id} className='pb-2'>
                     <span className='p-2'>{info.label}</span>
-                    <span>:</span>
+                    <span>: </span>
                     <span>{info.value}</span>
                 </div>
             ))
