@@ -9,7 +9,6 @@ import Input from '../components/Input'
 export default function index() {
   const router = useRouter()
   return (
-    
       <div className='flex bg-amber-300 shadow-xl h-screen w-screen items-center justify-center'>
         <div className='bg-white w-80 h-80  '>
           <i className='flex justify-center mt-9'>{IconTop()}</i>
