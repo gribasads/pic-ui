@@ -13,8 +13,8 @@ export default function index() {
         <div className='bg-white w-80 h-80  '>
           <i className='flex justify-center mt-9'>{IconTop()}</i>
           <div className='grid justify-center mt-10 gap-4' >
-            <Input  placeholder='Login' />
-            <Input  placeholder='Senha'/>
+            <Input type='text' placeholder='Login' />
+            <Input type='password'placeholder='Senha' />
             <ConfirmButton name='Entrar' func={()=> router.push('/home')} />
           </div>
         </div>
