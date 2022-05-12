@@ -18,7 +18,7 @@ export default function profile() {
       <BlockInfo infos={infos} title={'Dados Pessoais'}/>
       <div className='flex justify-end pt-2 gap-4'>
       <BackButton />
-      <ConfirmButton name='Alterar Senha'/>
+      <ConfirmButton name='Alterar Senha' func={()=>console.log('oi') }/>
       </div>
       </Page>
   )
