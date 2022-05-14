@@ -1,14 +1,18 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import BlockInfo from '../../components/BlockInfo'
 import BackButton from '../../components/Button/back'
 import ConfirmButton from '../../components/Button/confirm'
+import Modal from '../../components/modal'
 import Page from '../../components/template/Page'
 
 
 export default function serviceCall() {
     const router = useRouter()
     const { svc } = router.query
+    const [open, setOpen] = useState(false)
+    const [title, setTitle] = useState('')
+    const [type, setType] = useState<number | null>(null)
 
     const infos = [
       { id: 1, label: 'Cliente', value: 'John Doe' },
@@ -22,11 +26,14 @@ export default function serviceCall() {
   return (
     <Page>
 
-<div className='flex justify-end mb-2 gap-3'> 
-        <ConfirmButton name ='Finalizar' func={()=>alert('serviço finalizar')} />
-        <ConfirmButton name = 'Alterar'  func={()=>alert('serviço finalizar')} /> 
-</div>
+     <div className='flex justify-end mb-2 gap-3'> 
+        <ConfirmButton name ='Finalizar' func={()=>{setOpen(true), setTitle('Finalizar Serviço'),setType(0)}} />
+        <ConfirmButton name = 'Alterar'  func={()=>{setOpen(true), setTitle('Alterar Data de Serviço'),setType(1)}} /> 
+     </div>
         <BlockInfo infos={infos} title={'Chamados'}  />
+        {
+          open ? <Modal title={title} setOpen={setOpen} type={type} /> : null
+        }
         <div className='flex justify-end mt-2'>
         <BackButton />
         </div>
