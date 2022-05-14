@@ -27,7 +27,7 @@ export default function Table ({data, headers} : {data: any, headers: any}) {
                                         return <td key={header.key}>{row[header.key]}</td>
                                     })
                                 }
-                                <td><button onClick={e=>{router.push({pathname:'/historicOpen', query:{id:row.id}})}}>{IconEdit()}</button></td>
+                                <td><button onClick={e=>{router.push({pathname:('/historic/' + row.id), query:{id:row.id}})}}>{IconEdit()}</button></td>
                             </tr>
                         )
                     })
