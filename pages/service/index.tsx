@@ -1,6 +1,5 @@
 import React from 'react'
 import BackButton from '../../components/Button/back'
-
 import TableSvc from '../../components/table/tableSvc'
 import Page from '../../components/template/Page'
 
