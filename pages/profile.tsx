@@ -1,22 +1,17 @@
 import { parseCookies } from 'nookies'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import BlockInfo from '../components/BlockInfo'
 import BackButton from '../components/Button/back'
 import ConfirmButton from '../components/Button/confirm'
 import Page from '../components/template/Page'
 import { getProfile } from '../services/profile'
+import i18n from '../hook/i18n';
 
-type profileData = {
-  cpf: string;
-  name: string;
-  occupation: string;
-  zone: string;
-  phone: string;
-}
 
 export default function profile() {
   const [data, setData] = useState<any>()
-
+  
   
 
   const cookies = parseCookies()
@@ -25,7 +20,7 @@ export default function profile() {
   function getData () {
   getProfile(id).then(response => {
    const dataFomated = Object.entries(response.data[0]).map(([key, value]) => ({
-      label: key,
+      label: i18n.t(`profile.${key}`),
       value
     }))
     setData(dataFomated)
@@ -39,9 +34,6 @@ export default function profile() {
     getData()
   }, [])
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
   return (
     <Page title='Dados Cadastrais'>
        {data && <BlockInfo infos={data} title='Dados Cadastrais' />}

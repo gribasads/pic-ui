@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../hook/i18n'
 import type { AppProps } from 'next/app'
 import {  AuthProvider } from '../hook/AuthContext';
 

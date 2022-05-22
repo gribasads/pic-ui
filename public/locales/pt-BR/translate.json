@@ -1,0 +1,11 @@
+{
+    "profile":{
+        "idUser": "ID do Usuário",
+        "name": "Nome",
+        "occupation": "cargo",
+        "zone": "Zona de atendimento",
+        "phone": "Telefone",
+        "cpf": "CPF"
+    },
+    "teste": "bombou"
+}
