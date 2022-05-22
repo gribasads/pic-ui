@@ -1,58 +1,64 @@
-import { createContext,useState } from "react";
-import { setCookie,  destroyCookie, parseCookies } from 'nookies'
-import Router from 'next/router'
-import 'react-toastify/dist/ReactToastify.min.css';
+import { createContext, useState } from "react";
 import { api } from "../services/api";
-import { toast, ToastContainer } from 'react-toastify';
-import router from "next/router";
+import {destroyCookie, setCookie} from 'nookies';
+import  Router  from "next/router";
+import { toast, ToastContainer } from "react-toastify";
 
 type User = {
-  name: string;
-  email: string;
-  
+  id: number;
 }
 
 type SignInData = {
-  username: string;
+  login: string;
   password: string;
 }
-
-
 type AuthContextType = {
   isAuthenticated: boolean;
-  signOut: any
-  signIn: (data: SignInData) => Promise<void>
-}
+  userData: User;
+  signIn: (data: SignInData) => Promise<void>;
+  signOut
+};
 
-export const AuthContext = createContext({} as AuthContextType)
 
-export function AuthProvider({ children } : {children: any}) {
+export const AuthContext = createContext({} as AuthContextType);
+
+export function AuthProvider({ children }) {
 
   const [userData, setUserData] = useState<User>()
-   
+
   const isAuthenticated = !!userData;
-  
-  
-   async function signIn({ username,password }: SignInData) {
-     try {
-      const response = api.post('/users/login',{username,password})
-    if((await response).data.success)
-     Router.push('/home');
-     } catch (error) {
-      toast.error('Email ou senha incorreto')
-     }
+
+ 
+
+  async function signIn({ login,password }: SignInData) {
+    try {
+      const response: any = await api.post('users/login', {login, password})
+      const token = (await response).data?.token; 
+      const id = (await response).data?.id;
+      setCookie(undefined, 'token', token, {
+        maxAge:  60 * 60 *1, //1 HOUR
+      });
+      setCookie(undefined, 'id', id, {
+        maxAge:  60 * 60 *1, //1 HOUR
+      });
+      setUserData((await response).data?.id);
+
+      Router.push('/home');
+    } catch (error) {
+      alert(error.message)
+    }
+   
   }
 
-  async function signOut() {
+    async function signOut() {
     destroyCookie(undefined, 'nextauthtoken')
     destroyCookie(undefined, 'unopCode')
-    router.push('/')
+    Router.push('/')
   }
-
   
   return (
-    <AuthContext.Provider value={{  isAuthenticated, signIn,signOut}}>
-      {children}
+    <AuthContext.Provider value={{ userData, isAuthenticated , signIn, signOut}}>
+      { children }
       <ToastContainer/>
     </AuthContext.Provider>
   )
