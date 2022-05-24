@@ -1,9 +1,14 @@
 import Link from 'next/link'
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
+import { AuthContext } from '../../hook/AuthContext'
 import { IconHistoric, IconLogout, IconMenu, IconMenuClose, IconService, IconUser } from '../icons'
 
 export default function Menu() {
     const [open, setOpen] = useState(false)
+    const { signOut } = useContext(AuthContext)
+    async function logOut() {
+        await signOut()
+    }
   return (
     <div className='fixed'>
     <div className='inline-block p-3'>
@@ -26,9 +31,9 @@ export default function Menu() {
            <Link href={'/profile'} passHref><div className='text-amber-500 mb-10 cursor-pointer'>
              {IconUser()}
              </div></Link>
-           <Link href={'/'} passHref><div className='text-amber-500 mt-80 cursor-pointer'>
+           <div className='text-amber-500 mt-80 cursor-pointer' onClick={()=>logOut()}>
              {IconLogout()}
-             </div></Link>
+             </div>
           </div>
         </div>
         </>:null

@@ -52,8 +52,8 @@ export function AuthProvider({ children }) {
   }
 
     async function signOut() {
-    destroyCookie(undefined, 'nextauthtoken')
-    destroyCookie(undefined, 'unopCode')
+    destroyCookie(undefined, 'token')
+    destroyCookie(undefined, 'id')
     Router.push('/')
   }
   
