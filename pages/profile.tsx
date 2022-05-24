@@ -1,17 +1,18 @@
 import { parseCookies } from 'nookies'
 import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import Change from '../components/modal/changePassword'
 import BlockInfo from '../components/BlockInfo'
 import BackButton from '../components/Button/back'
 import ConfirmButton from '../components/Button/confirm'
 import Page from '../components/template/Page'
 import { getProfile } from '../services/profile'
 import i18n from '../hook/i18n';
+import {  ToastContainer } from 'react-toastify'
 
 
 export default function profile() {
   const [data, setData] = useState<any>()
-  
+  const [open, setOpen] = useState(false)
   
 
   const cookies = parseCookies()
@@ -38,8 +39,11 @@ export default function profile() {
     <Page title='Dados Cadastrais'>
        {data && <BlockInfo infos={data} title='Dados Cadastrais' />}
       <div className='flex justify-end pt-2 gap-4'>
+      {
+          open ? <Change  setOpen={setOpen} id={id} /> : null
+        }
       <BackButton />
-      <ConfirmButton name='Alterar Senha' func={()=>console.log('oi') }/>
+      <ConfirmButton name='Alterar Senha' func={()=>setOpen(true)}/>
       </div>
       </Page>
   )

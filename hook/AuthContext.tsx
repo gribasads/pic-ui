@@ -3,6 +3,7 @@ import { api } from "../services/api";
 import {destroyCookie, setCookie} from 'nookies';
 import  Router  from "next/router";
 import { toast, ToastContainer } from "react-toastify";
+import i18n from "./i18n";
 
 type User = {
   id: number;
@@ -42,10 +43,10 @@ export function AuthProvider({ children }) {
         maxAge:  60 * 60 *1, //1 HOUR
       });
       setUserData((await response).data?.id);
-
+     
       Router.push('/home');
     } catch (error) {
-      alert(error.message)
+      toast.error(i18n.t('auth.error'));
     }
    
   }

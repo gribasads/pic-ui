@@ -5,7 +5,12 @@
         "occupation": "cargo",
         "zone": "Zona de atendimento",
         "phone": "Telefone",
-        "cpf": "CPF"
+        "cpf": "CPF",
+        "change": "Mudar senha",
+        "changePassword": "Digite sua nova senha",
+        "passwordChanged": "Senha alterada com sucesso"
     },
-    "teste": "bombou"
+    "auth" : {
+        "error": "Usuário ou senha inválidos"
+    }
 }

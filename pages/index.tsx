@@ -3,7 +3,8 @@ import { IconTop } from '../components/icons'
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react';
 import { AuthContext } from '../hook/AuthContext';
-import {  ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
