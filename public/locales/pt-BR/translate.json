@@ -2,7 +2,7 @@
     "profile":{
         "idUser": "ID do Usuário",
         "name": "Nome",
-        "occupation": "cargo",
+        "occupation": "Cargo",
         "zone": "Zona de atendimento",
         "phone": "Telefone",
         "cpf": "CPF",

@@ -26,7 +26,7 @@ export default function ChangeModal(props: Props) {
        <div className='relative w-auto my-6 mx-auto max-w-3xl'>
        <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none p-4'>
         <span className='flex justify-center font-bold'>{i18n.t('profile.change')}</span>
-        <textarea className='resize-none mt-2 placeholder:p-2 border-2 border-black' cols={30} rows={4} 
+        <input className='resize-none mt-2 placeholder:p-2 border-2 border-black rounded p-2' 
         placeholder={i18n.t('profile.changePassword')} onInput={e => setPassword(e.currentTarget.value)}/>
         
         <div className='flex justify-between mt-4'>
