@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
 import React, { useEffect, useState } from 'react'
+import { ToastContainer } from 'react-toastify'
 import BlockInfo from '../../components/BlockInfo'
 import BackButton from '../../components/Button/back'
 import ConfirmButton from '../../components/Button/confirm'
@@ -19,6 +20,7 @@ export default function serviceCall() {
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState('')
     const [type, setType] = useState<number | null>(null)
+    const [date, setDate] = useState()
     
     function getData(){
       getServiceData(cpf, id).then(response => {
@@ -26,6 +28,8 @@ export default function serviceCall() {
           label: i18n.t(`historic.${key}`),
           value
         }))
+        setDate(response.data[0].dateService)
+        console.log(date)
         setData(dataFomated)
       })
     }
@@ -33,6 +37,11 @@ export default function serviceCall() {
       getData()
     }, [])
 
+   function getOriginalDate() {
+    data.includes('Data do Serviço') ? setDate(data.find(item => item.label === 'Data do Serviço').value) : null
+
+    }
+    
    
   return (
     <Page>
@@ -43,11 +52,12 @@ export default function serviceCall() {
      </div>
         <BlockInfo infos={data} title={'Chamados'}  />
         {
-          open ? <Modal title={title} setOpen={setOpen} type={type} /> : null
+          open ? <Modal title={title} setOpen={setOpen} type={type} id={id} ogDate={date} /> : null
         }
         <div className='flex justify-end mt-2'>
         <BackButton />
         </div>
+        <ToastContainer/>
     </Page>
   )
 }

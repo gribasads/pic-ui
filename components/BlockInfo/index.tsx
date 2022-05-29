@@ -1,4 +1,5 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify'
 
 export default function BlockInfo({infos, title} : {infos: any, title: string}) {
     
@@ -14,6 +15,7 @@ export default function BlockInfo({infos, title} : {infos: any, title: string}) 
                 </div>
             ))
      }
+     <ToastContainer />
     </div>
   )
 }
