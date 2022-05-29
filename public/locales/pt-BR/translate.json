@@ -13,13 +13,19 @@
     "auth" : {
         "error": "Usuário ou senha inválidos"
     },
-
     "historic":{
         "title": "Histórico de atendimentos",
+        "idService": "ID do atendimento",
         "date": "Data",
         "status": "Status",
-        "description": "Descrição",
+        "description": "Descrição do Serviço",
+        "cpfClient": "CPF do Cliente",
+        "dateService": "Data do Serviço",
+        "address": "Endereço",
+        "plan": "Plano",
         "details": "Detalhes",
-        "noHistoric": "Nenhum atendimento registrado"
+        "noHistoric": "Nenhum atendimento registrado",
+        "name": "Nome",
+        "phone": "Telefone"
     }
 }

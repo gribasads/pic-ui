@@ -7,6 +7,7 @@ import i18n from "./i18n";
 
 type User = {
   id: number;
+  cpf: string;
 }
 
 type SignInData = {
@@ -36,10 +37,14 @@ export function AuthProvider({ children }) {
       const response: any = await api.post('users/login', {login, password})
       const token = (await response).data?.token; 
       const id = (await response).data?.id;
+      const cpf = (await response).data?.cpf;
       setCookie(undefined, 'token', token, {
         maxAge:  60 * 60 *1, //1 HOUR
       });
       setCookie(undefined, 'id', id, {
+        maxAge:  60 * 60 *1, //1 HOUR
+      });
+      setCookie(undefined, 'cpf', cpf, {
         maxAge:  60 * 60 *1, //1 HOUR
       });
       setUserData((await response).data?.id);
@@ -54,6 +59,8 @@ export function AuthProvider({ children }) {
     async function signOut() {
     destroyCookie(undefined, 'token')
     destroyCookie(undefined, 'id')
+    setUserData(undefined)
+    destroyCookie(undefined, 'cpf')
     Router.push('/')
   }
   

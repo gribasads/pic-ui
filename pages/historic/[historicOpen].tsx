@@ -1,24 +1,34 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import { parseCookies } from 'nookies'
+import React, { useEffect, useState } from 'react'
 import BlockInfo from '../../components/BlockInfo'
 import BackButton from '../../components/Button/back'
 import Page from '../../components/template/Page'
+import i18n from '../../hook/i18n'
+import { getServiceData } from '../../services/historic'
 
 export default function historicOpen() {
     const router = useRouter()
-    const { id } = router.query
-
-    const infos = [
-      { id: 1, label: 'Cliente', value: 'John Doe' },
-      { id: 4, label: 'CPF', value: '865.444.232.12' },
-      { id: 5, label: 'Funcao', value: 'Ténico em eletrônica' },
-      { id: 6, label: 'Regiao', value: 'Porto Alegre - ZN' },
-      { id: 3, label: 'Telefone', value: '+55 11 99999-9999' },
-      { id: 2, label: 'E-mail', value: 'john@gmail.com' },
-    ]
+    const id = router.query.historicOpen
+    const cookies = parseCookies()
+    const cpf = cookies.cpf
+    const [data, setData] = useState([])
+    
+    function getData(){
+      getServiceData(cpf, id).then(response => {
+        const dataFomated = Object.entries(response.data[0]).map(([key, value]) => ({
+          label: i18n.t(`historic.${key}`),
+          value
+        }))
+        setData(dataFomated)
+      })
+    }
+    useEffect(() => {
+      getData()
+    }, [])
   return (
     <Page>
-        <BlockInfo infos={infos} title={'Chamado'}  />
+        <BlockInfo infos={data} title={'Chamado'}  />
         <div className='flex justify-end mt-2'>
         <BackButton />
         </div>

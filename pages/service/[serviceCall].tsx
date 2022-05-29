@@ -1,28 +1,39 @@
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import { parseCookies } from 'nookies'
+import React, { useEffect, useState } from 'react'
 import BlockInfo from '../../components/BlockInfo'
 import BackButton from '../../components/Button/back'
 import ConfirmButton from '../../components/Button/confirm'
 import Modal from '../../components/modal'
 import Page from '../../components/template/Page'
+import i18n from '../../hook/i18n'
+import { getServiceData } from '../../services/historic'
 
 
 export default function serviceCall() {
     const router = useRouter()
-    const { svc } = router.query
+    const id = router.query.serviceCall
+    const cookies = parseCookies()
+    const cpf = cookies.cpf
+    const [data, setData] = useState([])
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState('')
     const [type, setType] = useState<number | null>(null)
+    
+    function getData(){
+      getServiceData(cpf, id).then(response => {
+        const dataFomated = Object.entries(response.data[0]).map(([key, value]) => ({
+          label: i18n.t(`historic.${key}`),
+          value
+        }))
+        setData(dataFomated)
+      })
+    }
+    useEffect(() => {
+      getData()
+    }, [])
 
-    const infos = [
-      { id: 1, label: 'Cliente', value: 'John Doe' },
-      { id: 4, label: 'CPF', value: '865.444.232.12' },
-      { id: 5, label: 'Funcao', value: 'Ténico em eletrônica' },
-      { id: 6, label: 'Regiao', value: 'Porto Alegre - ZN' },
-      { id: 3, label: 'Telefone', value: '+55 11 99999-9999' },
-      { id: 2, label: 'E-mail', value: 'john@gmail.com' },
-      { id: 7, label: 'Status', value: svc },
-    ]
+   
   return (
     <Page>
 
@@ -30,7 +41,7 @@ export default function serviceCall() {
         <ConfirmButton name ='Finalizar' func={()=>{setOpen(true), setTitle('Finalizar Serviço'),setType(0)}} />
         <ConfirmButton name = 'Alterar'  func={()=>{setOpen(true), setTitle('Alterar Data de Serviço'),setType(1)}} /> 
      </div>
-        <BlockInfo infos={infos} title={'Chamados'}  />
+        <BlockInfo infos={data} title={'Chamados'}  />
         {
           open ? <Modal title={title} setOpen={setOpen} type={type} /> : null
         }
