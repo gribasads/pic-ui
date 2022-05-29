@@ -12,5 +12,14 @@
     },
     "auth" : {
         "error": "Usuário ou senha inválidos"
+    },
+
+    "historic":{
+        "title": "Histórico de atendimentos",
+        "date": "Data",
+        "status": "Status",
+        "description": "Descrição",
+        "details": "Detalhes",
+        "noHistoric": "Nenhum atendimento registrado"
     }
 }

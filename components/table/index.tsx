@@ -21,13 +21,13 @@ export default function Table ({data, headers} : {data: any, headers: any}) {
                 {
                     data.map((row: any) => {
                         return (
-                            <tr key={row.id}>
+                            <tr key={row.idService}>
                                 {
                                     headers.map((header: any) => {
                                         return <td key={header.key}>{row[header.key]}</td>
                                     })
                                 }
-                                <td><button onClick={e=>{router.push({pathname:('/historic/' + row.id), query:{id:row.id}})}}>{IconEdit()}</button></td>
+                                <td><button onClick={e=>{router.push({pathname:('/historic/' + row.idService), query:{id:row.idService}})}}>{IconEdit()}</button></td>
                             </tr>
                         )
                     })
