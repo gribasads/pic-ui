@@ -2,6 +2,7 @@ import { parseCookies } from 'nookies'
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { alterService, doneService } from '../../services/svc'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Modal({title, setOpen, type, id, ogDate} : {title: string, setOpen: any, type: number | null, id:any, ogDate:any}) {
@@ -42,7 +43,7 @@ export default function Modal({title, setOpen, type, id, ogDate} : {title: strin
         <textarea className='resize-none mt-2 placeholder:p-2 border-2 border-black' cols={30} rows={4} 
         placeholder={`${type == 0? "Serviço Realizados" : "Motivo"} `} onChange={e=>{setDescription(e.currentTarget.value)}}/>
         {
-          type == 1 ? <input type="date" className='mt-2' onChange={e=>{setDate(e.currentTarget.value)}} /> : null
+          type == 1 ? <input type="datetime-local" className='mt-2' onChange={e=>{setDate(e.currentTarget.value)}} /> : null
         }
         <div className='flex justify-between mt-4'>
             <button className='bg-white text-black border-2 border-black font-bold py-2 px-4 rounded-lg 

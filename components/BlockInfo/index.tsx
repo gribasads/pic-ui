@@ -15,7 +15,7 @@ export default function BlockInfo({infos, title} : {infos: any, title: string}) 
                 </div>
             ))
      }
-     <ToastContainer />
+     
     </div>
   )
 }

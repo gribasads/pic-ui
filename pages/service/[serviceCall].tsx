@@ -20,7 +20,11 @@ export default function serviceCall() {
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState('')
     const [type, setType] = useState<number | null>(null)
-    const [date, setDate] = useState()
+    const [date, setDate] = useState<any>()
+    const [disable,setDisable] = useState(false)
+    const newDate = new Date(date)
+    const d = new Date();
+    
     
     function getData(){
       getServiceData(cpf, id).then(response => {
@@ -28,27 +32,26 @@ export default function serviceCall() {
           label: i18n.t(`historic.${key}`),
           value
         }))
-        setDate(response.data[0].dateService)
-        console.log(date)
+        setDate(dataFomated.find(item => item.label === 'Data do Serviço').value)
         setData(dataFomated)
       })
     }
     useEffect(() => {
       getData()
     }, [])
-
-   function getOriginalDate() {
-    data.includes('Data do Serviço') ? setDate(data.find(item => item.label === 'Data do Serviço').value) : null
-
-    }
-    
+    useEffect(() => {
+      if (d.toISOString().split('T')[0] == date) setDisable(true)
+      console.log('hora: ', d.toISOString().split('T')[0])
+      console.log('data: ', date)
+    }, [date])
+  
    
   return (
     <Page>
 
      <div className='flex justify-end mb-2 gap-3'> 
         <ConfirmButton name ='Finalizar' func={()=>{setOpen(true), setTitle('Finalizar Serviço'),setType(0)}} />
-        <ConfirmButton name = 'Alterar'  func={()=>{setOpen(true), setTitle('Alterar Data de Serviço'),setType(1)}} /> 
+        <ConfirmButton name = 'Alterar'  func={()=>{setOpen(true), setTitle('Alterar Data de Serviço'),setType(1)}} disabled={disable} /> 
      </div>
         <BlockInfo infos={data} title={'Chamados'}  />
         {
@@ -57,7 +60,7 @@ export default function serviceCall() {
         <div className='flex justify-end mt-2'>
         <BackButton />
         </div>
-        <ToastContainer/>
+        
     </Page>
   )
 }
