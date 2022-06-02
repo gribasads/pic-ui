@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ReactTooltip from 'react-tooltip';
 
 interface IProps {
   name: string
@@ -11,7 +12,13 @@ export default function ConfirmButton(props: IProps) {
  
 
   return (
-    <button className={`p-2 bg-black border rounded 
-     border-gray-500 hover:opacity-70 text-white ${disabled == true ? 'opacity-70 cursor-not-allowed':null}`} disabled={disabled} onClick={func}>{name}</button>
+    <>
+    {disabled == true?<><button className={`p-2 bg-black border rounded 
+     border-gray-500 opacity-70 text-white cursor-not-allowed`} data-tip="Data limite atingida" data-place='top'>{name}</button><ReactTooltip /></>:
+     <button className={`p-2 bg-black border rounded 
+     border-gray-500 hover:opacity-70 text-white`} onClick={func}>{name}</button>
+     }
+     
+     </>
   )
 }
