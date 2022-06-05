@@ -12,8 +12,7 @@ interface Prop {
 export default function Page(prop: Prop) {
   const { children, title } = prop
   return (
-    <div className="flex min-h-screen w-screen bg-orange-50">
-        <Menu />
+    <div className="flex min-h-screen w-screen bg-orange-50 ">
       <div className="flex flex-col w-full">
         <Topbar />
         <div className={`p-7 h-full`}>
