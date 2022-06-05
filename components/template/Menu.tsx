@@ -10,7 +10,7 @@ export default function Menu() {
         await signOut()
     }
   return (
-    <div className='fixed'>
+    <div className='absolute'>
     <div className='inline-block p-3'>
      <button onClick={()=>setOpen(prev => !prev)}>
      {!open ?IconMenu():IconMenuClose()}
@@ -18,7 +18,7 @@ export default function Menu() {
     </div>
     {
         open ? <>
-        <div className=' fixed h-screen w-32  bg-black opacity-50'>
+        <div className=' absolute h-screen w-32  bg-black opacity-50'>
           <div className='p-10 flex-col'>
            <Link href={'/service'} passHref>
              <div className='text-amber-500 mb-10 cursor-pointer'>

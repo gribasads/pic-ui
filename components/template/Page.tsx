@@ -14,6 +14,7 @@ export default function Page(prop: Prop) {
   return (
     <div className="flex min-h-screen w-screen bg-orange-50 ">
       <div className="flex flex-col w-full">
+        <Menu />
         <Topbar />
         <div className={`p-7 h-full`}>
           <Title title={title} />
